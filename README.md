@@ -1,5 +1,2 @@
-# CS 3366
-
-https://idatavisualizationlab.github.io/CS3366/
-
-![QR Code CS3366](data/photos/qrcode.png)
+# Human Computer Interaction - Spring 2021
+https://idatavisualizationlab.github.io/HCI-Spring2021/
