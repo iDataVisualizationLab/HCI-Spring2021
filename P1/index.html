@@ -1,0 +1,535 @@
+<!-- Adapted from https://www.evl.uic.edu/aej/424/ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>CS3366: Human Computer Interaction </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+    <style type="text/css">
+        /*table.fixed { table-layout:fixed; }*/
+    </style>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        /*
+        Generic Styling, for Desktops/Laptops
+        */
+        table {
+            font-size: 14px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        /* Zebra striping */
+        /*tr:nth-of-type(odd) {*/
+        /*    background: #eee;*/
+        /*}*/
+        tr:nth-of-type(even) {
+            background: #eee;
+        }
+        tr:nth-of-type(odd) {
+            background: #fff;
+        }
+        th {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            background-repeat: no-repeat;
+            background-position: 3% center;
+        }
+        td, th {
+            padding: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .name{
+            width: 200px;
+            overflow: hidden;
+            display: inline-block;
+            /*white-space: nowrap;*/
+        }
+
+        .link {
+            max-width:250px;
+            word-wrap:break-word;
+            white-space: normal
+        }
+
+        th.des:after {
+            content: "\21E9";
+        }
+
+        th.aes:after {
+            content: "\21E7";
+        }
+
+        /*
+        Max width before this PARTICULAR table gets nasty
+        This query will take effect for any screen smaller than 760px
+        and also iPads specifically.
+        */
+        @media
+        only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+            /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr { border: 1px solid #ccc; }
+
+            td {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            /*
+            Label the data
+            */
+            td:before {
+                content: attr(data-th) ": ";
+                font-weight: bold;
+                width: 6.5em;
+                display: inline-block;
+            }
+        }
+
+        /* Smartphones (portrait and landscape) ----------- */
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 480px) {
+            body {
+                padding: 0;
+                margin: 0;
+                width: 320px; }
+        }
+
+        /* iPads (portrait and landscape) ----------- */
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            body {
+                width: 495px;
+            }
+        }
+
+    </style>
+</head>
+<body bgcolor="white" text="black">
+
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project 1: Personal Mirror</font></div>
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="4">
+    <ul>
+        <li style="margin-left: 30px"> Submission includes: <br>
+            1) A 1000 x 500 or 500 x 500 <b>gif</b> image of your
+            final interface which should be named <font color="#aa0">p1.groupID.gif</font>. Your groupID will be determined after you form your group. <br>
+            2) GitHub repository link. You should also name your git project <font color="#aa0">P1.groupID</font> <br>
+            3) Presentation page (e.g. GitHub page), <br>these are due at <font color="#000">11:59pm Sunday, Nov 3rd</font> and should be sent through <b>Email</b> (with the subject: <b>CS3366 P1 submission:</b> groupID or <b>CS5332 P1 submission:</b> groupID)  to the <font color="#00f"><b>harichandana.byna@ttu.edu</b></font>.<br>
+            4) <font color="#e00">Teammate feedback are due at 11:59pm Wednesday, Nov 6th</font> and should be sent through <b>Email</b> (with the subject: <b>CS3366 P1 feedback:</b> groupID or <b>CS5332 P1 feedback:</b> groupID)  to the <font color="#00f"><b>harichandana.byna@ttu.edu</b></font>. It is <b>1%</b> of your final score.<br><br>
+        <li style="margin-left: 30px"> This homework is <b>30%</b> of your final grade:<br>
+        <li style="margin-left: 60px"><b>25%</b> for design, implementation, in-class presentation from the instructor.</li>
+        <li style="margin-left: 60px"><b>5%</b> for design, implementation, and presentation from the class (other students).</li>
+        </li>
+
+        <li style="margin-left: 30px"> You need to provide feedback to the presenting students to score the <b>2%</b> of your final result. No feedback, or Nonsense feedback gets <b>0%</b>.
+          <br>
+            <span>Scoring link:</span> <a
+                    style="font-weight: bold" href="https://demo-presentation.herokuapp.com/scoring">https://demo-presentation.herokuapp.com/scoring</a>
+          <br>
+            The feedback (ranging from 1 to 10 where 10 is the best) includes:<br> 
+            1) Does the project follow the golden rules and principles in lecture 2,3, and 4? 
+            2) Usability of the interface<br>
+            3) Visual appealing<br>
+            4) Interactivity <br>
+            5) Efforts <br>
+            6) Comments (optional). Only the instructor will see this. <br>
+        <br>
+
+         <!--
+        <li style="margin-left: 30px"> Today, Oct 14: I get to know your group, less than 2 minutes per group -> Seat in groups
+        <br>
+            1) Did you meet your teamate regarding the Project 1? How many times?<br>
+            2) Who is the team leader? Responsisble for duty division, keep the team on track, set up the meeting schedule, and report issues to the instructor if there are. <br>
+            3) Did you procude a scketch of the UI and the main functions to be supported?<br>
+            4) Are there any issues with your team? <br>
+            5) Other questions/concerns?<br>  
+            <br>
+        -->    
+        <li style="margin-left: 30px"> Monday, Oc 21: 2-minute Sketch presentaion
+        <br>
+            1) Send your github repo link, presentation link, group picure, and sketch picture, named <font color="#000">p1.groupID.png</font>, (with the subject: <b>CS3366 P1 sketch: groupID </b>or <b>CS5332 P1 sketch: groupID</b>)  to the <font color="#00f"> <b>harichandana.byna@ttu.edu</b></font> by <font color="#e00">11:59pm Saturday, Oct 19th</font>. <br>
+            2) Indtroduce team members and duties <br>
+            3) Present your scketch UI and the main functions to be supported?<br>
+            4) How far did you go with the implementation?<br>  
+            5) The plan to move forward?<br>  
+         </ul>
+    <br>
+    <br>
+    Here is an example of Prototype sketching. <br>
+            <center>  <img src="17project2sketch.jpeg" alt="" border="0" width="1000"> </center>
+</font></div>
+
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Homework Description:</font></div>
+
+<font style="font-family:Helvetica;" color="black" size="4">
+    <ul>
+        <li style="margin-left: 30px"> People now have access to a rapidly growing number of public data sources from the web/cloud which are getting augmented with personal sensors which now commonly talk to mobile phones or web pages. We are going to look at designing an interface to make this kind of data and more available on your personal bathroom mirror (single person use), which could act as a large display touch display.
+        </li>
+
+        <li style="margin-left: 30px"> You will be working in groups. Due to the class size, the group size will probably be 4-5 people, which will give us 20 groups. You will need to choose your team, and email me the member names by <font color="#e00">11:59pm Wenesday, Oct 2nd</font> to <font color="#00f"><b>harichandana.byna@ttu.edu</b> </font>(with the subject: <b>CS3366 P1 group formation</b>  or <b>CS5332 P1 group formation:</b>) . If you only have a partial team (1 person, 2 people, 3 people) that's OK, I can randomly assign people to fill in, or mix and match partial teams. If you are interested in being added onto a team you must to talk to the instructor after classes.
+        </li>
+    </ul>   
+
+<br>
+<hr width="100%" size="2"><span style="font-weight: bold;
+        text-decoration: underline;">
+      </span>
+      <span style="font-weight: bold; text-decoration: underline;">Sketch phase</span><br>
+      <br>
+      In this phase you are going to think about the user interface to a
+      bathroom mirror that has been combined with a display screen,
+      speakers, and possibly microphones. Think of something like a
+      large thin-border touch TV with a half-silvered mirror in front of
+      it so it continues to reflect the user's image while being able to
+      simultaneously display computer generated graphics and act as a
+      touch screen for interaction. Its main function is to still act
+      like a mirror, but while you are in front of the mirror the mirror
+      will give you additional information. Since it is a single person use, we do not worry about privacy for now. A microphone is not required but you may choose to add one.<br>
+      <font color="#f00">The project should be implemented in p5.js; other supporting javascript libraries can be used.</font>   
+      <br>
+      <br>
+      Some of the general information that the mirror will provide are<br>
+      <ul>
+        <li>personalized calendar events for today</li>
+        <li>personalized news feed items, text messages, social feed items, <br>
+        </li>
+        <li>clock<br>
+        </li>
+        <li>local weather</li>
+        <li><font color="#f00">Password login or face recognition is not required? </font>         
+        <li><font color="#080">The mirror can be connected to Wifi and synched with your smart phone</font></li>
+      </ul>
+      The mirror should also provide health-related information such as<br>
+      <ul>
+        <li>how long you slept last night, how much was light sleep vs
+          deep sleep, and how your total hours sleep compares to the
+          last week of data<br>
+        </li>
+        <li>your current weight (assuming you have a scale embedded in
+          the floor in front of the mirror), and how it compares to the
+          last week of data<br>
+        </li>
+        <li>how many steps you took, how long you stood, and how long you exercised yesterday, and how that compares to the last week of data on a time series plot.</li>
+        <li>how long do you spend in front of the mirror in the morning
+          and evening?</li>
+       
+      </ul>
+      <font color="#ffff00"> <br>
+      </font> Some other things the system should do<br>
+      <ul>
+        
+        <li>allow the user to customize the display - e.g. the widget
+          sizes and locations (drag and drop items in the desired location on the screen) </li>
+        <li>play music when you are brushing your teeth or in the shower
+          - how do you control the playlist?</li>
+        <li>It can be your TV/computer as well</li>
+        <li>act as a light source (with different possible colours) </li>
+        <li>your imagination </li>
+      </ul>
+      <br>
+     
+
+
+      General grade scale:
+      <ul>
+            <li>implementing the interface for the general information and health information with a good interface gets a <font color="#00f">C</font></li>
+            <li>adding other useful features like those in the 'other things' section with a good interface gets a <font color="#00f">B</font> </li>
+            <li>having an elegant design for those features, or a very good design with some other useful features gets an <font color="#00f">A</font> </li>
+     </ul>
+
+</font>
+<!--
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> To get a <font color="#00f">C</font>, you need to:</b>   
+         <ul>
+            <li style="margin-left: 30px"> Find an elevator in the apartment/campus/hotel. Only one example for each student.
+            </li>
+            <li style="margin-left: 30px"> Take photos of the control interface
+            </li>
+            <li style="margin-left: 30px"> Show a gif image of the control interface in operation.
+            </li>
+            <li style="margin-left: 30px"> Find the issues with the current design.
+            </li>
+            <li style="margin-left: 30px"> Explain why it is bad.
+            </li>
+        </ul>  
+    </font>
+
+
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> To get a <font color="#00f">B</font>, you need to:</b>   
+         <ul>
+            <li style="margin-left: 30px"> Think about the common things that you use an elevator. List your most common uses and other more rare uses. Does the interface make doing those common things easier? </li>
+
+            <li style="margin-left: 30px"> Think about how the user interacts with the elevator. What is the common sequence of actions?</li>
+
+            <li style="margin-left: 30px">  How does the elevator support the user figure out how to make it work? </li>
+
+            <li style="margin-left: 30px"> How does the elevator provide feedback to the user? </li>
+
+            <li style="margin-left: 30px"> What are some common mistakes you can make with this current design? </li>
+
+            <li style="margin-left: 30px"> Suggest the improvements to make on the control interface. Sketch your solution. And justify your design decisions.
+                Here is an example of Low-Fidelity Prototype sketching out the design (for a different purpose). <br>
+
+            <center>  <img src="IMG_0037.jpeg" alt="" border="0" width="500"> </center>
+            </li>
+        </ul>  
+    </font>
+
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> Now, imagine that you can have a touch screen on the elevator. To get a <font color="#00f">A</font>, you need to:</b>   
+         <ul>
+            <li style="margin-left: 30px"> Come with your design for the touch screen? What is the screen size that you want?</li>
+
+            <li style="margin-left: 30px"> Design and implement interactive features</li>
+
+             <li style="margin-left: 30px"> Design and implement user feedback</li>
+
+             <li style="margin-left: 30px"> You can use any tools you want including Processing, javascript, or even power point.</li>
+        </ul>  
+    </font>
+
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> You can get <font color="#00f">extra</font> credits if:</b>   
+         <ul>
+            <li style="margin-left: 30px"> Your design supports people with disabilities </li>
+
+            <li style="margin-left: 30px"> You provide extra useful information on the display interface. </li>
+
+            <li style="margin-left: 30px"> Your imagination ...</li>
+        </ul>  
+    </font>
+ 
+ 
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project report on Github (readme file):</font></div>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        This report also serves as your homework presentation. 
+        The presentation is strictly 110/100/90 seconds. 
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Add a link to your interface/interactive features implementation. You can host it <a
+            href="https://pages.github.com/">on your github</a> page.
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Describle your homework via text,figures, and screenshots.
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        The instructions for report README sample file and presentation page can be found at: <a
+            href="https://github.com/nnhuyen/new-hw1/blob/master/README.md">https://github.com/nnhuyen/new-hw1/blob/master/README
+        .md</a>
+    </font>
+</li>
+-->
+<!--<font style="font-family:Helvetica;" color="black" size="4"> 
+An example github report can be found <a href="https://github.com/CreativeCodingLab/TimeArcs">here<a>.            
+</font> -->
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">In-class presentation:</font></div>
+
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        The presentation is 10 minutes per group.  Make sure that you are ready to talk right after the group in front of you is done.
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    
+    <font style="font-family:Helvetica;" color="black" size="4">
+        You are getting votes from other groups on the go. This is also 5%/30% of your homework score .
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Please practice your talk. Show the basic functionality and emphasize on why your interface is different.
+    </font>
+</li>
+
+
+<hr style="width: 100%; height: 1px;">
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project1 teams</font></div>
+
+
+<!--<div id="main" style="margin-top: 60px"></div>-->
+<div id="tableHolder" style="margin-top: 20px"></div>
+</body>
+<script type="text/javascript">
+    var titles = ["id", "name", "image", "sketch", "screenshot", "url", "githubURL"];
+
+    let numColumn = 1;
+    let imgHeight = 100;
+
+    function split(data, numColumn){
+        let dataTotal = {};
+        let len = data.length;
+        let minHeight = Math.floor(len/numColumn);
+        let remainder = len%numColumn;
+
+        for (let i = 0; i < numColumn; i++){
+            if (i < remainder){
+                // du ra
+                dataTotal["data" + i] = data.slice(i*minHeight + i, (i+1)*minHeight + (i+1))
+            }
+            else {
+                dataTotal["data" + i] = data.slice(
+                    (remainder*minHeight + remainder) + (i-remainder)*minHeight,
+                    (remainder*minHeight + remainder) + (i-remainder+1)*minHeight
+                )
+            }
+        }
+        return dataTotal
+    }
+
+    function draw(dataTotal, numColumn, imgHeight){
+        d3.select("#tableHolder").selectAll("*").remove();
+        var table = d3.select('#tableHolder').append('table').append("tr");
+
+        for (let i = 0; i < numColumn; i++){
+            let thisTable = table.append("td")
+                .attr("valign","top")
+                .append('table');
+
+            thisTable.append('thead').append('tr')
+                .selectAll('th')
+                .data(titles).enter()
+                .append('th')
+                .text(d => {
+                    if (d === "url"){
+                        return "Presentation URL"
+                    }
+                    else if (d === "githubURL"){
+                        return "GitHub"
+                    }
+                    else return d.charAt(0).toUpperCase() + d.substring(1);
+                });
+
+            thisTable.append('tbody') .attr("id", "tb" + i);
+
+            dataTotal["data" + i].forEach(function (row,index)  {
+                // console.log(row)
+                var names = row.name.split(",").join("<br>")
+                var personal_photo = row.image != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.image + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                var sketch_photo = row.sketch != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.sketch + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                var screenshot_photo = row.screenshot != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.screenshot + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                var url = row.url != "" ?
+                    '<a target="_blank" href="'+ row.url  +'">' + row.url + '</a>' : ""
+
+                var githubURL = row.githubURL != "" ?
+                    '<a target="_blank" href="'+ row.githubURL  +'">' + row.githubURL + '</a>' : ""
+
+
+                return $("#tb" + i).append('<tr>' +
+                    '<td>' + row.id + '</td>' +
+                    '<td style="vertical-align: middle;"><span class="name">' +  names + '</span></td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + personal_photo  + '</td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + sketch_photo  + '</td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + screenshot_photo  + '</td>' +
+                    '<td class="link">' + url + '</span></td>' +
+                    '<td class="link"><span>' + githubURL + '</span></td>' +
+                    '</tr>');
+            });
+        }
+    }
+
+    d3.csv('../data/project1_presfinal3.csv',function (error, data) {
+        if (error) throw error;
+
+        let dataTotal = split(data, numColumn);
+        draw(dataTotal, numColumn, imgHeight);
+    });
+
+</script>
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">In-class evaluation:</font></div>
+
+     <br>
+   <!--<a href="https://nnhuyen.github.io/hci/project1/presenters.html"> Feedback from your classmates<a> -->
+    <center>  <img src="Project1ClassEvaluation1.png" alt="" border="0" width="1500"> </center>
+    <center>  <img src="Project1ClassEvaluation2.png" alt="" border="0" width="1500"> </center>
+    <center>  <img src="Project1ClassEvaluation3.png" alt="" border="0" width="1500"> </center>
+      <br>
+      <br>
+      <br>
+</html>

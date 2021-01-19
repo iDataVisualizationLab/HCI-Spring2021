@@ -1,0 +1,1282 @@
+
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    <meta name="generator" content="Adobe GoLive 4">
+    <title>CS 422: Lecture 4</title>
+    <meta name="Template" content="D:\PROGRAM
+      FILES\MSOFFICE\OFFICE\html.dot">
+</head>
+<body bgcolor="white" text="black">
+<h1 style="font-family: Helvetica,Arial,sans-serif;">Human Factors
+    &amp; Direct Manipulation</h1>
+<hr style="font-family: Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif;">(material from:
+    <u>Designing the User Interface</u> bySchneiderman, SIGGRAPH 96
+    course notes #12 - Graphic Design for Usable GUIs)<br>
+    &nbsp;</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">So far we have
+    talked a lot about fairly conceptual things, now we're going to
+    talk some about putting some rough numbers to those concepts ...</p>
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b>the Model Human Processor</b></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">approximation
+    that allows us to make some predictions</p>
+<p style="font-style: italic; font-family:
+      Helvetica,Arial,sans-serif;"><img style="border: 0px solid ;
+        width: 689px; height: 870px;" alt="Model Human Processor"
+                                        src="images/processor.png" width="689" height="870"><br>
+    wikipedia version -
+    https://en.wikipedia.org/wiki/Human_processor_model<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">Model Human
+    Processor- p26 of The Psychology of Human-Computer Interaction</p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li type="disc">mu: Storage capacity in terms </li>
+    <li type="disc">delta: decay time of an item </li>
+    <li type="disc">kappa: main code type </li>
+    <li type="disc">tau: cycle time<br>
+    </li>
+</ul>
+<br>
+<span style="font-family: Helvetica,Arial,sans-serif;">For a simple
+      perceive / decide / respond (perception / cognition / motor
+      response) it takes roughly 240ms (100 + 70 + 70) though the range
+      is 105-470 ms<br>
+      <br>
+      In the normal way people think and work, things aren't really so
+      isolated, but as a model it can give you a general sense of our
+      capabilities<br>
+      <br>
+    </span>
+<hr style="width: 50%; height: 2px; font-family:
+      Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b><br>
+    chunks</b></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    BCSBMICRA<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    &nbsp;</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    CBSIBMRCA<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    &nbsp;</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">or</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    4865267437</p>
+<span style="font-family: Helvetica,Arial,sans-serif;"><br>
+      &nbsp; &nbsp;vs<br>
+      <br>
+      <br>
+      &nbsp; &nbsp;(480) 526-7437<br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      &nbsp; &nbsp;Here is a short on-line test from the exploratorium:<br>
+      &nbsp; &nbsp;<a target="_blank"
+                      href="http://www.exploratorium.edu/memory/dont_forget/playing_games.html">http://www.exploratorium.edu/memory/dont_forget/playing_games.html</a></span>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp;
+    Here is what the results look like from my last four cs 422
+    classes</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp; <img
+        src="images/image_count.png" alt="" width="610" height="290"> </p>
+<p style="font-family: Helvetica,Arial,sans-serif;">Comparing the
+    last five classes:<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><img
+        src="images/200617compare.jpeg" alt="" width="872" height="1310"></p>
+<hr style="width: 100%; height: 2px;">
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">A bit more on
+    text. You have several general choices of font styles to use<br>
+</p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>sans-serif (e.g. Helvetica, Arial, Verdana, Tahoma) good for
+        on-screen text - e.g. 72 dpi</li>
+    <li>serif (e.g. Times, Georgia) - good for printed text - e.g.
+        150-300 dpi. As screen resolutions increase serif fonts become
+        more appropriate.<br>
+    </li>
+    <li>monospace - good for certain occasions when you need exact
+        alignment of the text<br>
+    </li>
+    <li>fantasy / cute / brush strokes / cursive / dripping blood -
+        just say no, unless you are creating a party invitation<br>
+    </li>
+</ul>
+<span style="font-family: Helvetica,Arial,sans-serif;">The helvetica
+      documentary from 2007 (88% on rotten tomatoes) is worth checking
+      out if you want to dig deeper into this sort of thing<br>
+      <br>
+      And one font, <span style="font-family: Comic Sans MS;">comic
+        sans</span>, deserves some mention on its own. <a
+            href="http://www.mcsweeneys.net/articles/im-comic-sans-asshole"
+            target="_blank">Here</a> is one good link (with profanity) about
+      comic sans. In the summer of 2011 there were quite a few blog
+      posts devoted to a 100 page US Army PowerPoint presentation using
+      comic sans e.g. <a
+            href="http://www.gizmodo.com.au/2011/07/us-army-declares-war-on-sanity-with-comic-sans-presentation/"
+            target="_blank">this one</a>. <br>
+      <br>
+      Scientists do this kind of thing as well. How long does it take
+      for you to read the title screen here? - <a
+            href="https://www.youtube.com/watch?v=nLacmrM5xQw"
+            target="_blank">https://www.youtube.com/watch?v=nLacmrM5xQw</a><br>
+      <br>
+    </span><span style="font-family: Helvetica,Arial,sans-serif;">Since
+      we are focusing on interactive computer-based visualizations, you
+      should start with a sans-serif font like Helvetica and only change
+      it if you have a very good reason. <br>
+      <br>
+      Here is a nice infographic on type - <a
+            href="http://www.buzzfeed.com/lenkendall/a-guide-to-typography-infographic-wh6"
+            target="_blank">http://www.buzzfeed.com/lenkendall/a-guide-to-typography-infographic-wh6</a><br>
+      <br>
+      <br>
+    </span><span style="font-family: Helvetica,Arial,sans-serif;">
+      Familiar words are recognized by shape<br>
+    </span>
+<ul>
+    <li><span style="font-family: Helvetica,Arial,sans-serif;">lower
+          case words are read faster than words in upper case</span></li>
+    <li><span style="font-family: Helvetica,Arial,sans-serif;">individual
+letters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          and nonsense words like UA1416 are read faster in upper case</span></li>
+</ul>
+<br>
+<span color="#f00" style="font-family: Helvetica,Arial,sans-serif;">O lny srmat
+      poelpe can raed tihs. </span><br style="font-family:
+      Helvetica,Arial,sans-serif;">
+<span style="font-family: Helvetica,Arial,sans-serif;">I cdnuolt
+      blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. The
+      phaonmneal pweor of the hmuan mnid, aoccdrnig to a rscheearch at
+      Cmabrigde Uinervtisy, it deosn't mttaer in waht oredr the ltteers
+      in a wrod are, t he olny iprmoatnt tihng is taht the frist and
+      lsat ltteer be in the rgh it pclae. The rset can be a taotl mses
+      and you can sitll raed it wouthit a porbelm. Tihs is bcuseae the
+      huamn mnid deos not raed ervey lteter by istlef, but the wrod as a
+      wlohe. Amzanig huh? yaeh and I awlyas tghuhot slpeling was
+      ipmorantt! if you can raed tihs psas it on !!"</span>
+<p style="font-family: Helvetica,Arial,sans-serif;"></p>
+<hr style="width: 100%; height: 2px; font-family:
+      Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><br>
+    <b>Fitts's Law - Paul Fitts - 1954 - Speed and Accuracy in
+        Hand/Arm Movement<br>
+    </b></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+    time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Tpos to move the hand to a target of size S which lies distance D
+    away is<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T<sub>pos</sub> = I<sub>M</sub>
+    log<sub>2</sub> (D/S + 0.5) where I<sub>M</sub> = 100 [70-120]
+    msec/bit</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">
+    &nbsp;&nbsp;&nbsp; Faster to hit a bigger target. Faster to hit a
+    closer target.<br>
+    &nbsp;&nbsp;&nbsp; Different I<sub>M </sub>constants for
+    different devices (finger, mouse, joystick, trackball)<br>
+    &nbsp;&nbsp;&nbsp; Predicts human speed&nbsp;in rapid aimed
+    movement in one dimension</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp;
+    Others including MacKenzie and Buxton have made modifications to
+    create 2D<br>
+    &nbsp; &nbsp; and 3D versions where it is the smaller dimension of
+    the target area that is critical<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T<sub>pos</sub> = I<sub>M</sub>
+    log<sub>2</sub> (D/min(S1,S2) + 0.5) where I<sub>M</sub> = 100
+    [70-120]msec/bit</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp; A
+    very detailed discussion can be found here: <a
+            href="http://www.yorku.ca/mack/phd.html" target="_blank">http://www.yorku.ca/mack/phd.html</a></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    and wikipedia: <a
+            href="http://en.wikipedia.org/wiki/Fitts%27s_law"
+            target="_blank">http://en.wikipedia.org/wiki/Fitts's_law</a></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; <br>
+    &nbsp; So why should we care about this?</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp; A
+    Web-based Interactive Visualization<br>
+    &nbsp;&nbsp;&nbsp; <a
+            href="http://www.simonwallner.at/ext/fitts/" target="_blank">http://www.simonwallner.at/ext/fitts/</a>
+    or<a href="http://fww.few.vu.nl/hci/interactive/fitts/"
+         target="_blank"> http://fww.few.vu.nl/hci/interactive/fitts/</a><br>
+    <a href="http://www.tele-actor.net/fitts/index.html"></a></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp;
+    MSDN article on Fitts and Web Design<br>
+    &nbsp; &nbsp; <a
+            href="http://msdn2.microsoft.com/en-us/library/ms993291.aspx"
+            target="_blank">http://msdn2.microsoft.com/en-us/library/ms993291.aspx</a><br>
+    <br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+    With computer screens we also have the advantage of having edges
+    to the display that can stop our pointer from moving, making it
+    hard / impossible to overshoot targets at the edges, which is why
+    most menus sit there, but if you are mostly working in the center
+    of the display, it can make more sense to have pop-up menus appear
+    nearby to minimize movement.<br>
+</p>
+<hr style="width: 100%; height: 2px;"><br>
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b>Power Law of Practice</b></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+    time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Tn to perform a task on the n<sup>th</sup> trial follows a power
+    law<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T<sub>n</sub> = T<sub>1</sub>n<sup>-a</sup>
+    where a = 0.4 [0.2 - 0.6]<br>
+    &nbsp; &nbsp; note this is just skilled behaviour using perceptual
+    and motor skills, not knowledge acquisition.</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp;
+    you will get better as you continue to perform as task, but the
+    amount of improvement keeps decreasing ... though fatigue will
+    also be a factor.</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp; &nbsp; <img
+        src="images/fittsgraph.jpg" alt="" width="408" height="358"
+        border="0"><br>
+    Vertical axis is time (seconds), Horizontal axis is trial number<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">First time users
+    will be near the left side of the graph, everyday users to the
+    right.<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">If you want to
+    test how every day users perform with your new interface then you
+    need to make sure to let them practice with it enough to get past
+    the issues of initial use.<br>
+</p>
+<hr style="width: 100%; height: 2px; font-family:
+      Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b>Keystroke Level Model - Card, Moran, Newell - 1983<br>
+</b></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    only
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    gives predictions for execution time, not acquisition time
+    (planning)<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+    &nbsp;&nbsp;&nbsp; these numbers are based on mouse &amp; keyboard
+    but they are easily applicable to track pads, pens, and touch
+    screens as well<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    K
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    - Keystroking - striking keys<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (pressing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    a shift or a control counts as a K as well)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    best
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    typist 0.08 sec (135 wpm)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    good
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    typist 0.12 sec (90 wpm)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    poor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    typist 0.28 sec&nbsp; (40 wpm)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    non-typist&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    1.20 sec (9 wpm)<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B - Pressing a mouse
+    button (or touching the screen)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    down
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    or up&nbsp; 0.10 sec<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    click&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    0.20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    sec<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; P - Moving the mouse at
+    a target (numbers are slightly different for just moving your hand
+    or a pen)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    fitts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    law 0.1 log<sub>2</sub>(D/S + 0.5)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    average (mouse) 1.10 sec<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H - Homing - switching
+    hand between mouse and keyboard 0.40 sec<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M - Mentally preparing
+    for a physical action 1.35 sec<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; R - System response<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    are hard to place - there are a set of heuristics (p 267 Card
+    book)</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Say
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    we are using a word processor and see an incorrect character on
+    the screen. We use the mouse&nbsp; to position the insertion bar,
+    delete the incorrect character, add the new character and then
+    return to where&nbsp; we were in the document:<br>
+    &nbsp;
+<table width="300" cellspacing="2" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>move hand to mouse</td>
+        <td>H[mouse]</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>position mouse after bad character</td>
+        <td>PB[left]</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>return to keyboard</td>
+        <td>H[keyboard]</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>delete character</td>
+        <td>MK[delete]</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>type correction</td>
+        <td>K[char]</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>reposition insertion point</td>
+        <td>H[mouse]MPB[left]</td>
+    </tr>
+    </tbody>
+</table>
+&nbsp;</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;How useful
+    are all these numbers really ???<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">exercise for the
+    end of today's class - in a group of 2 (one with a computer) work
+    out the keystroke level sequence (Ks, Bs, Ms, etc)&nbsp; for the
+    following task - trying to make a reservation for a Valentine's
+    Day dinner:<br>
+    <br>
+    - bring up a new browser window<br>
+    - go to google<br>
+    - search for top chicago restaurants<br>
+    - Click on the Girl &amp; the goat to see google’s data on it<br>
+    - click on the menu link to go to the Girl &amp; the goat website<br>
+    - try to find a table for tonight </p>
+<hr style="width: 100%; height: 2px;"><br>
+<p style="font-family: Helvetica,Arial,sans-serif; font-weight:
+      bold; text-decoration: underline;">Evolution of the word processor
+    as the technology improves</p>
+<b></b>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>Line editor -&nbsp;teletype (typewriter with very long paper
+        roll &nbsp;from the 70s)</li>
+    <ul>
+        <li>this was back before computers had CRT terminals, but after
+            punch cards</li>
+        <li>display is ink on paper<br>
+        </li>
+        <li>could work on a single line at a time</li>
+        <li>could ask the computer to print the last n lines</li>
+        <br>
+        <li>initial CRT terminal versions had same functionality but
+            with the screen replacing the paper roll<br>
+        </li>
+    </ul>
+</ul>
+<img src="images/teletype-wikipedia.jpg" alt="" width="400"
+     height="533"><font face="Helvetica, Arial, sans-serif">Image from
+    Wikipedia</font><br>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <ul>
+    </ul>
+    <li>Screen editor - textual based screen, e.g. emacs or vi</li>
+    <ul>
+        <li>can move a cursor around a 2D representation of the text on
+            the screen</li>
+        <li>screen is a fixed grid (e.g. 24 rows and 80 columns) with a
+            single fixed size font<br>
+        </li>
+        <li>can type where the cursor is located to insert text<br>
+        </li>
+    </ul>
+</ul>
+<img src="images/wikipedia-terminal.jpg" alt="" width="400"
+     height="355"><font face="Helvetica, Arial, sans-serif">Image from
+    Wikipedia</font><br>
+<br>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <ul>
+    </ul>
+    <li>WYSIWYG editor - bitmapped display, e.g. Microsoft word</li>
+    <ul>
+        <li>multiple fonts, colours, sizes</li>
+        <li>display has a resolution in pixels: 640x480, 1024x768
+            pixels, etc.<br>
+        </li>
+        <li>can move mouse around screen<br>
+        </li>
+        <li>can see a full page of text as it would appear when its
+            printed</li>
+        <li>toolbars, menus, ribbons for rapid access to features<br>
+            <br>
+            <img src="images/macwrite.jpg" alt="" width="400" height="302">
+            image from <a
+                    href="http://christianboyce.blogspot.com/2011/10/some-thoughts-on-steve-jobs.html"
+                    target="_blank">BoyceBlog</a><br>
+        </li>
+    </ul>
+    <ul>
+    </ul>
+</ul>
+<div style="margin-left: 40px; font-family:
+      Helvetica,Arial,sans-serif;"><br>
+    and now people are sometimes writing (short) documents on their
+    WYSIWYG tablets with part of the screen taken up by an on-screen
+    keyboard<br>
+    <br>
+    <br>
+    General movement towards more direct manipulation though we still
+    have commonly used typesetting languages like TeX and LaTeX, or
+    even html if you hand code it, allowing you to take the same text
+    and automatically reformat it for different publication styles.
+    These still make use of screen editors or WYSIWYG editors.<br>
+    <br>
+    <br>
+    Now we can use pens or our fingers on tablets, or voice
+    recognition to write. The goal remains the same - the means change
+    with the technology. The trick is trying to prepare for the future
+    when we can't see what the new enabling technologies will be.<br>
+    <br>
+    <br>
+    Some examples of looking into the future and seeing it in terms of
+    current technology:<br>
+    <br>
+    As we may think&nbsp; -1945 - <a
+            href="http://www.theatlantic.com/magazine/archive/1945/07/as-we-may-think/3881/?single_page=true"
+            target="_blank">http://www.theatlantic.com/magazine/archive/1945/07/as-we-may-think/3881/?single_page=true</a><br>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a
+            href="http://en.wikipedia.org/wiki/Memex" target="_blank">http://en.wikipedia.org/wiki/Memex<br>
+    </a><br>
+    Philco Ford Corporation: "1999 A.D."- 1967 - <a
+            href="https://www.youtube.com/watch?v=0RRxqg4G-G4"
+            target="_blank">https://www.youtube.com/watch?v=0RRxqg4G-G4</a><br>
+    <br>
+    Doug Engelbart - 1968 - <a
+            href="https://www.youtube.com/watch?v=yJDv-zdhzMY"
+            target="_blank">https://www.youtube.com/watch?v=yJDv-zdhzMY</a><br>
+    and <a
+            href="https://en.wikipedia.org/wiki/The_Mother_of_All_Demos"
+            target="_blank">https://en.wikipedia.org/wiki/The_Mother_of_All_Demos</a><br>
+    <br>
+    ATT "You Will" Commercials - 1993 - <a
+            href="https://www.youtube.com/watch?v=a2EgfkhC1eo"
+            target="_blank">https://www.youtube.com/watch?v=a2EgfkhC1eo</a><br>
+    <br>
+</div>
+<div style="font-family: Helvetica,Arial,sans-serif;">&nbsp;<br>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Some good newer ones are
+    from<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Corning - 2011 - A day made
+    of glass - <a href="https://www.youtube.com/watch?v=6Cf7IL_eZ38"
+                  target="_blank">https://www.youtube.com/watch?v=6Cf7IL_eZ38</a><br>
+    <br>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Microsoft - 2015 - Future
+    Vision 2020 - <a
+            href="https://www.youtube.com/watch?v=ozLaklIFWUI"
+            target="_blank">https://www.youtube.com/watch?v=ozLaklIFWUI</a><br>
+    <br>
+</div>
+<hr style="width: 100%; height: 2px; font-family:
+      Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif;">All of the
+    previously mentioned concepts end up being dealt with in terms of
+    windows, icons, dialogue boxes, and menus</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">the middle of
+    the course will deal with principles for designing these in more
+    detail. Here are some general rules which should help with the
+    projects before we revisit these again in detail</p>
+<hr style="width: 100%; height: 2px;">
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b>windows</b></p>
+<p style="font-family: Helvetica,Arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+    give
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    the user the ability to see multiple pieces of information at the
+    same time</p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>use a grid structure for window contents<br>
+    </li>
+    <li>standardize the screen layout </li>
+    <li>group related elements, separate unrelated elements </li>
+    <li>provide an initial focus for the viewer's attention </li>
+    <li>direct attention to important items </li>
+    <li>minimize clutter so critical information is not hidden </li>
+    <li>assist in navigation throughout the material </li>
+</ul>
+<hr style="width: 100%; height: 2px;">
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b><br>
+    icons</b></p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>select a distinctive point of view </li>
+    <li>emphasize archetypal features </li>
+    <li>exploit user's knowledge of the world - familiarity </li>
+    <li>respect established conventions</li>
+</ul>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>allude to the familiar - trash can, folders </li>
+    <li>repeat signs for emphasis - tool kits </li>
+    <li>exaggerate / understate - trash can = destroy </li>
+    <li>provide contrast - selection value-reversal </li>
+    <li>repeat sign parts for combinations - kinds of documents </li>
+</ul>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>make distinctive features prominent </li>
+    <li>make the icon readable at a glance </li>
+    <li>avoid obscure visual puns </li>
+    <li>make the icon appealing </li>
+</ul>
+<p style="font-family: Helvetica,Arial,sans-serif;"> &nbsp;</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">now imagine you
+    have only&nbsp; a 32 x 32 or 128 x 128 pixel grid to display that
+    icon. <br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">icon sizes have
+    become much, much larger for desktop computers, laptops, and
+    tablets - but devices such as watches, google glass etc are back
+    to having smaller displays - <a
+            href="http://www.gizmodo.co.uk/2012/03/one-ios-icon-is-larger-than-the-entire-original-macintosh-screen/"
+            target="_blank">gizmodo</a><br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+</p>
+<hr style="width: 100%; height: 2px;">
+<p style="font-family: Helvetica,Arial,sans-serif;">menus are lists
+    of verbs, nouns, adjectives and adverbs<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif;">on devices with
+    displays we see the menus visually, but we can also have
+    audio-only menus like we used to have on classic telephones, but
+    which are also making a comeback in audio interfaces<br>
+</p>
+<p style="font-family: Helvetica,Arial,sans-serif; text-decoration:
+      underline;"><b>menus</b></p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>group menu items according to easily recognizable logical
+        relations to make them more easily learned </li>
+    <li>group menu items to be clearly distinguishable perceptually </li>
+    <li>position most likely selections given the current context for
+        easy access </li>
+</ul>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>left justify all textual menu items </li>
+    <li>capitalize only initial letters of items </li>
+    <li>separate groups, icons and hotkey codes </li>
+</ul>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>For Tree structured menus</li>
+    <ul>
+        <li>use consistent and concise phrasing</li>
+    </ul>
+    <ul>
+        <li>use familiar terminology</li>
+    </ul>
+    <ul>
+        <li>create groups of logically similar items</li>
+    </ul>
+    <ul>
+        <li>form groups that cover all possibilities</li>
+    </ul>
+    <ul>
+        <li>make sure menu items are non-overlapping<br>
+            <br>
+        </li>
+    </ul>
+    <li>Order items in an appropriate way</li>
+    <ul>
+        <li>&nbsp;&nbsp;&nbsp; alphabetical</li>
+    </ul>
+    <ul>
+        <li>&nbsp;&nbsp;&nbsp; numerical (time, ascending, descending)</li>
+    </ul>
+    <ul>
+        <li>&nbsp;&nbsp;&nbsp; most frequently used first</li>
+    </ul>
+</ul>
+<hr style="width: 100%; height: 2px;">
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+    dialogue boxes are 2D layouts of&nbsp; verbs, nouns, adjectives
+    and adverbs</p>
+<p style="font-family: Helvetica,Arial,sans-serif;"><b
+        style="text-decoration: underline;">dialogue boxes</b></p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>display all parameters within the panel according to task
+        groups</li>
+    <li>present all controls required to complete the task</li>
+    <li>make the most frequently used controls easy to locate and
+        manipulate</li>
+    <li>spatial order of controls should reflect the typical
+        interaction sequences</li>
+    <li>establish a clear context for each dialogue box with prominent
+        and consistently located titles</li>
+    <li>highlight the default options&nbsp;</li>
+</ul>
+<ol style="font-family: Helvetica,Arial,sans-serif;">
+    <li>analyze the contents </li>
+    <li>create a conceptual diagram </li>
+    <li>sort the area into information zones </li>
+    <li>set up a layout grid </li>
+    <li>tell a story visually </li>
+    <li>use color with discretion </li>
+    <li>let the typography tell the story </li>
+    <li>minimize variation in lengths and widths </li>
+    <li>make any instructions clear </li>
+    <li>leave enough space for data entry </li>
+    <li>use a short clear title </li>
+    <li>evaluate design with users </li>
+</ol>
+<ol style="font-family: Helvetica,Arial,sans-serif;">
+</ol>
+<p style="font-family: Helvetica,Arial,sans-serif;"><br>
+    When asking the user to enter data, try to help by making the
+    expected format obvious in the form</p>
+<ul style="font-family: Helvetica,Arial,sans-serif;">
+    <li>telephone numbers</li>
+    <li>date</li>
+    <li>time of the day</li>
+    <li>currency<br>
+    </li>
+</ul>
+<p style="font-family: Helvetica,Arial,sans-serif;">Of course this
+    is tricky because all of these things are culturally dependent</p>
+<hr style="width: 100%; height: 2px; font-family:
+      Helvetica,Arial,sans-serif;">
+<p style="font-family: Helvetica,Arial,sans-serif;">Many tools exist
+    for building interfaces and they change fairly regularly</p>
+<hr style="width: 100%; height: 2px; font-family:
+      Helvetica,Arial,sans-serif;">
+
+<span style="font-family:
+      Helvetica,Arial,sans-serif;">Source: https://www.evl.uic.edu/aej/422/week06.html<br>Updated Oct 16, 2019</span>
+</body>
+</html>

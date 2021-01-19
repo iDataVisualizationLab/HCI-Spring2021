@@ -1,0 +1,452 @@
+<!-- Adapted from https://www.evl.uic.edu/aej/424/ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>CS3366: Human Computer Interaction </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+    <style type="text/css">
+        /*table.fixed { table-layout:fixed; }*/
+    </style>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        /*
+        Generic Styling, for Desktops/Laptops
+        */
+        table {
+            font-size: 14px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        /* Zebra striping */
+        /*tr:nth-of-type(odd) {*/
+        /*    background: #eee;*/
+        /*}*/
+        tr:nth-of-type(even) {
+            background: #eee;
+        }
+        tr:nth-of-type(odd) {
+            background: #fff;
+        }
+        th {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            background-repeat: no-repeat;
+            background-position: 3% center;
+        }
+        td, th {
+            padding: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .name{
+            width: 200px;
+            overflow: hidden;
+            display: inline-block;
+            /*white-space: nowrap;*/
+        }
+
+        .link {
+            max-width:250px;
+            word-wrap:break-word;
+            white-space: normal
+        }
+
+        th.des:after {
+            content: "\21E9";
+        }
+
+        th.aes:after {
+            content: "\21E7";
+        }
+
+        /*
+        Max width before this PARTICULAR table gets nasty
+        This query will take effect for any screen smaller than 760px
+        and also iPads specifically.
+        */
+        @media
+        only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+            /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr { border: 1px solid #ccc; }
+
+            td {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            /*
+            Label the data
+            */
+            td:before {
+                content: attr(data-th) ": ";
+                font-weight: bold;
+                width: 6.5em;
+                display: inline-block;
+            }
+        }
+
+        /* Smartphones (portrait and landscape) ----------- */
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 480px) {
+            body {
+                padding: 0;
+                margin: 0;
+                width: 320px; }
+        }
+
+        /* iPads (portrait and landscape) ----------- */
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            body {
+                width: 495px;
+            }
+        }
+
+    </style>
+</head>
+<body bgcolor="white" text="black">
+
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project 2: Game inteface?</font></div>
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="4">
+    <ul>
+        <li style="margin-left: 60px"><b>25%</b> for design, implementation, in-class presentation from the instructor.</li>
+        <li style="margin-left: 60px"><b>5%</b> for design, implementation, and presentation from the class (other students).</li>
+        <li style="margin-left: 60px"><b>6%</b> for user study.</li>
+        </li>
+
+        <li style="margin-left: 30px"> You need to provide feedback to the presenting students to score the <b>2%</b> of your final result. No feedback, or Nonsense feedback gets <b>0%</b>.
+          <br>
+            <span>Scoring link:</span> <a style="font-weight: bold"
+                    href="https://demo-presentation.herokuapp.com/scoring">https://demo-presentation.herokuapp.com/scoring</a>
+          <br>
+            The feedback (ranging from 1 to 10 where 10 is the best) includes:<br> 
+            1) Does the project follow the golden rules and principles in lecture 2,3, and 4? <br>
+            2) Usability of the interface<br>
+            3) Visual appealing<br>
+            4) Interactivity <br>
+            5) Sound effects <br>
+            6) Efforts<br>
+            7) Teamwork<br>
+            8) Comments (optional). Only the instructor will see this. <br>
+        <br>
+        </li>
+
+        <li style="margin-left: 30px"> Team formation are due at 11:59pm Friday, Nov 8th and should be sent through <b>Email</b> (with the subject: <b>CS3366 P2 Team formation:</b> groupID or <b>CS5332 P2 Team formation:</b> groupID)  to the <font color="#00f"><b>harichandana.byna@ttu.edu</b></font>.<br><br></li>
+        <li style="margin-left: 30px"> Project 2 topic are due at 11:59pm Tuesday, Nov 12th and should be sent through <b>Email</b> (with the subject: <b>CS3366 P2 topic:</b> groupID or <b>CS5332 P2 topic:</b> groupID)  to the <font color="#00f"><b>harichandana.byna@ttu.edu</b></font>.<br>
+            We will disccuss (aprrove/reject/modify) the topic in the class on Wenesday, Nov 13th<br>
+            The final group topics are due at 11:59pm on Wenesday, Nov 13th<br></li>
+        </li>
+
+        <br>
+        <li style="margin-left: 30px"> Friday, Nov 22: 2-minute Sketch presentaion
+        <br>
+            1) Send your github repo link, demo link, presentation (report) link, group picure, and sketch picture, named <font color="#000">p2.groupID.png</font>, (with the subject: <b>CS3366 P2 sketch: groupID </b>or <b>CS5332 P2 sketch: groupID</b>)  to the <font color="#00f"> <b>harichandana.byna@ttu.edu</b></font> by <font color="#000">11:59pm Thursday, Nov 21</font>. <br>
+            2) Indtroduce team members and duties <br>
+            3) Present your scketch UI and the main functions to be supported?<br>
+            4) How far did you go with the implementation?<br>  
+            5) The plan to move forward?<br>  
+         Here is an example of Prototype sketching. Please include the sketches in the report. You can have multiple drawings for different functionalities/scenarios in your game interface.<br>
+         </li>   <br>
+
+        <li style="margin-left: 30px"> Monday, Dec 2: User study <b>6%</b> of your final results  
+        <br>
+            1) Add Demo link, task decription, hypothesis by <font color="#000">11:59pm Sunday, Dec 1</font> via your github report.<br>
+            2) Focus on 1 single task (if your UI support more than 1) <br>
+            3) Each group will have from 5 to 10 users<br>
+            4) The group can conduct the study in parallel<br>  
+            5) Each user should take about 5 to 8 minutes: UI introduction, task description, user study, recoding the result: accuracy, timing, and qualitative feedback<br>
+            6) Your 6% is divided into 3% for user role on other group UI and 3% forconductor/controller role for your project. The resuts will be reported on a piece of paper<br> 
+            7) More details will be added here (how to devide the class time/space). <br> 
+         </li>   <br><br>
+           
+        <li style="margin-left: 30px"> <font color="#f00">Sunday, Dec 8 at 11:59pm: Final Submission includes:</font> <br>
+            1) A 1000 x 500 or 500 x 500 <b>gif</b> image of your
+            final interface which should be named <font color="#aa0">p2Final.groupID.gif</font>. Your groupID will be determined after you form your group. <br>
+            2) GitHub repository link. You should also name your git project <font color="#aa0">P2.groupID</font> <br>
+            3) Presentation page (e.g. GitHub page), should be sent through <b>Email</b> (with the subject: <b>CS3366 P2 submission:</b> groupID or <b>CS5332 P2 submission:</b> groupID)  to the <font color="#00f"><b>harichandana.byna@ttu.edu</b></font>.<br>
+            4) <font color="#e00">Teammate feedback are due at 11:59pm Tuesday, Dec 11th</font> and should be sent through <b>Email</b> (with the subject: <b>CS3366 P2 feedback:</b> groupID or <b>CS5332 P2 feedback:</b> groupID) to the <font color="#00f"><b>harichandana.byna@ttu.edu</b></font>. It is <b>1%</b> of your final score.
+             </li> <br><br>
+
+         <li style="margin-left: 30px"> <font color="#f00">Monday, Dec 9 at 4:30 p.m. to 7:00 p.m.: Final Presentation (in the classroom)</font>    
+</ul>    
+</font></div>
+
+<br>
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project 2 Description:</font></div>
+
+<font style="font-family:Helvetica;" color="black" size="4">
+    <a href="https://chi2020.acm.org/authors/student-game-competition/">https://chi2020.acm.org/authors/student-game-competition/</a> <br><br>
+
+    Some references: <br>
+    <a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html"> Webcam controller</a><br>
+    <a href="https://www.youtube.com/watch?v=iCWrRrze9No"> AI Pong - TensorFlow.js </a><br>
+    <a href="https://www.youtube.com/watch?v=JbQ3KXVSwrg"> AI learns to play simple game </a><br><br>
+
+    <b>Sample project:</b> <br> A web/phone interface for freshman student at Texas Tech. Tasks could be (not limited to):
+    <br>
+    <li style="margin-left: 60px"> Navigate on campus using a google map.</li>
+    <li style="margin-left: 60px"> Display upcoming student events, such as new student orientation, introductory tour.</li>
+    <li style="margin-left: 60px"> Provide housing recommendations or guidance/helps.</li>
+    <li style="margin-left: 60px"> Provide important contacts such as acedamic advisors, health care providers, or police departments.</li>
+    <li style="margin-left: 60px"> Provide acedamic milestones such as course registration requirements or deadlines.</li> 
+    <li style="margin-left: 60px"> Lubbock city guide.</li> 
+<br>
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project report on Github (readme file):</font></div>
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        This report also serves as your P2 presentation. 
+        The presentation is 5 minutes. 
+    </font>
+</li>
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Add a link to your demo. You can host it <a
+            href="https://pages.github.com/">on your github</a> page.
+    </font>
+</li>
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Describe team members and duties
+    </font>
+</li>
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Include your P2 sketches
+    </font>
+</li>
+
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Describle your work via text, figures, and screenshots.
+    </font>
+</li>
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Cite libraries and references used in your Project 2 research and implementation.
+    </font>
+</li>    
+
+
+<br>
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">In-class presentation:</font></div>
+
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        The presentation is 5 minutes per group.  Make sure that you are ready to talk right after the group in front of you is done.
+    </font>
+</li>
+
+<li style="margin-left: 60px">
+    
+    <font style="font-family:Helvetica;" color="black" size="4">
+        You are getting votes from other groups on the go. This is also 5%/30% of your homework score .
+    </font>
+</li>
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Please practice your talk. Show the basic functionality and emphasize on why your interface is different.
+    </font>
+</li>
+
+<li style="margin-left: 60px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+
+        A good group presentation: <br>
+        1) Teamwork: care and help each other<br>
+        2) At least 2 people can talk about every task<br>
+        3) Unified interface <br>
+        4) Careful thinking and designing<br>
+        <a href="https://engrmediacast.ttu.edu/Mediasite/Play/b9a32683894a4fa79ebcc5a3627747571d?catalog=2b947087128e49eca02e264a758b075021&playFrom=438&autoStart=true">
+https://engrmediacast.ttu.edu/Mediasite/Play/b9a32683894a4fa79ebcc5a3627747571d?catalog=2b947087128e49eca02e264a758b075021&playFrom=438&autoStart=true <a> <br>Start at the 32th minute.
+</li>
+<br>
+
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Grading factors:</div>
+           <font style="font-family:Helvetica;" color="black" size="4">
+     <li style="margin-left: 60px"> The interface based on the 5 criteria above.</li>
+     <li style="margin-left: 60px"> The implementation, including github investigating.</li>
+     <li style="margin-left: 60px"> The project report.</li>
+     <li style="margin-left: 60px"> Sketch presentation.</li>
+     <li style="margin-left: 60px"> Project presentation.</li>
+     <li style="margin-left: 60px"> Teammate evaluation.</li>
+     <li style="margin-left: 60px"> May include conducting the user study and analyzing study results for Project 2.</li>
+ </font>
+<br>        
+
+
+<hr style="width: 100%; height: 1px;">
+
+
+
+    <div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project 2 teams and topics</font></div>
+
+<div id="tableHolder" style="margin-top: 20px"></div>
+
+
+</body>
+<script type="text/javascript">
+   // var titles = ["id", "name", "image", "sketch", "screenshot", "url", "githubURL"];
+   var titles = ["id", "name", "image", "topic","sketch","url","githubURL"];
+
+    let numColumn = 1;
+    let imgHeight = 100;
+
+    function split(data, numColumn){
+        let dataTotal = {};
+        let len = data.length;
+        let minHeight = Math.floor(len/numColumn);
+        let remainder = len%numColumn;
+
+        for (let i = 0; i < numColumn; i++){
+            if (i < remainder){
+                // du ra
+                dataTotal["data" + i] = data.slice(i*minHeight + i, (i+1)*minHeight + (i+1))
+            }
+            else {
+                dataTotal["data" + i] = data.slice(
+                    (remainder*minHeight + remainder) + (i-remainder)*minHeight,
+                    (remainder*minHeight + remainder) + (i-remainder+1)*minHeight
+                )
+            }
+        }
+        return dataTotal
+    }
+
+    function draw(dataTotal, numColumn, imgHeight){
+        d3.select("#tableHolder").selectAll("*").remove();
+        var table = d3.select('#tableHolder').append('table').append("tr");
+
+        for (let i = 0; i < numColumn; i++){
+            let thisTable = table.append("td")
+                .attr("valign","top")
+                .append('table');
+
+            thisTable.append('thead').append('tr')
+                .selectAll('th')
+                .data(titles).enter()
+                .append('th')
+                .text(d => {
+                    if (d === "url"){
+                        return "Presentation URL"
+                    }
+                    else if (d === "githubURL"){
+                        return "GitHub"
+                    }
+                    else return d.charAt(0).toUpperCase() + d.substring(1);
+                });
+
+            thisTable.append('tbody') .attr("id", "tb" + i);
+
+            dataTotal["data" + i].forEach(function (row,index)  {
+                // console.log(row)
+                var names = row.name.split(",").join("<br>")
+                var personal_photo = row.image != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.image + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+                var project_topic=row.topic;
+               var sketch_photo = row.sketch != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.sketch + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                /*var screenshot_photo = row.screenshot != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.screenshot + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+                 */
+                var url = row.url != "" ?
+                    '<a target="_blank" href="'+ row.url  +'">' + row.url + '</a>' : ""
+
+                var githubURL = row.githubURL != "" ?
+                    '<a target="_blank" href="'+ row.githubURL  +'">' + row.githubURL + '</a>' : ""
+
+
+                return $("#tb" + i).append('<tr>' +
+                    '<td>' + row.id + '</td>' +
+                    '<td style="vertical-align: middle;"><span class="name">' +  names + '</span></td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + personal_photo  + '</td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + project_topic  + '</td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + sketch_photo  + '</td>' +
+                    '<td class="link">' + url + '</span></td>' +
+                    '<td class="link"><span>' + githubURL + '</span></td>' +
+                    '</tr>');
+            });
+        }
+    }
+
+    d3.csv('../data/project2_presentation.csv',function (error, data) {
+        if (error) throw error;
+
+        let dataTotal = split(data, numColumn);
+        draw(dataTotal, numColumn, imgHeight);
+    });
+
+</script>
+
+</html>

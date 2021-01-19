@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <!--[if !IE]><!-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font: 14px/1.4 sans-serif;
+        }
+        #page-wrap {
+            margin: 20px;
+        }
+        #inputHolder{
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 20px 0;
+        }
+        
+        /*
+        Generic Styling, for Desktops/Laptops
+        */
+        table {
+            /*height: 50%;*/
+            width: 100%;
+            border-collapse: collapse;
+        }
+    
+        /* Zebra striping */
+        tr:nth-of-type(even) {
+            background: #eee;
+        }
+        tr:nth-of-type(odd) {
+            background: #fff;
+        }
+        th {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            cursor: s-resize;
+            background-repeat: no-repeat;
+            background-position: 3% center;
+        }
+        td, th {
+            padding-left: 10px ;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        
+        .newtd {
+            border: 0px;
+        }
+        
+        th.des:after {
+            content: "\21E9";
+        }
+        
+        th.aes:after {
+            content: "\21E7";
+        }
+    
+    
+    </style>
+</head>
+<body bgcolor="white" text="black">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif; margin-top: 3px; padding: 10px" color="black" size="5">Enrolled Students</font></div>
+
+<!--<form id="frm1">-->
+<!--Number of Column: <input type="number" name="quantity" min="1" max="5">-->
+<!--<input type="submit">-->
+<!--</form>-->
+
+<div id="page-wrap">
+    <div id="inputHolder"></div>
+    <div id="tableHolder"></div>
+</div>
+<script type="text/javascript">
+    var titles = ["Photo", "Full Name"];
+    var attrT = ["Fullname" ,
+        // "Presentationdate", "P1Selection", "DataLink"
+    ];
+
+    let numColumn = 5;
+    let imgHeight = 100;
+
+    function scandata(row) {
+        return attrT.map(function(d) {
+            if (d == 'DataLink') {
+                var link = row.P1Link != "" ? '<a href=' + row.P1Link + ' target=blank>'+
+                    '<i class="fa fa-database" title="Data Link" style="font-size:18px;color:black"></i>' + '</a>':"" ;
+                // var link = row.P1Link != "" ? '<a href=' + row.P1Link + ' target=blank>Data</a>' : "";
+
+                var link_project = row.ProjectLink != "" ? '<a href=' + row.ProjectLink + ' target=blank>' +
+                    '<i class="fa fa-github" title="Github" style="font-size:20px;color:black"></i>' + '</a>' : "";
+
+
+                var link_demo = row.Demo != "" ? '<a href=' + row.Demo + ' target=blank>' +
+                    '<i class="fa fa-globe" title="Web application" style="font-size:20px;color:black" aria-hidden="true"></i>' + '</a>' : "";
+
+                return '<td>' + row[d] + link + " " + link_project + " " +  link_demo +'</td>'
+            }
+
+
+            return  row[d]
+        });
+    }
+
+    function split(data, numColumn){
+        let dataTotal = {};
+        let len = data.length;
+        let minHeight = Math.floor(len/numColumn);
+        let remainder = len%numColumn;
+
+        for (let i = 0; i < numColumn; i++){
+            if (i < remainder){
+                // du ra
+                dataTotal["data" + i] = data.slice(i*minHeight + i, (i+1)*minHeight + (i+1))
+            }
+            else {
+                dataTotal["data" + i] = data.slice(
+                    (remainder*minHeight + remainder) + (i-remainder)*minHeight,
+                    (remainder*minHeight + remainder) + (i-remainder+1)*minHeight
+                )
+            }
+        }
+        return dataTotal
+    }
+    function countCurrent(dataTotal, idx) {
+        let keys = Object.keys(dataTotal);
+        let sum = 0;
+        for (let i = 0; i < idx; i++){
+            sum += dataTotal[keys[i]].length;
+        }
+        return sum;
+    }
+    function draw(dataTotal, numColumn, imgHeight){
+        d3.select("#tableHolder").selectAll("*").remove();
+        var table = d3.select('#tableHolder').append('table').append("tr");
+
+        for (let i = 0; i < numColumn; i++){
+            let thisTable = table.append("td")
+                .attr("class", "newtd")
+                .attr("valign","top")
+                .append('table');
+
+            thisTable.append('thead').append('tr')
+                .selectAll('th')
+                .data(titles).enter()
+                .append('th')
+                .text(d => d);
+
+            thisTable.append('tbody') .attr("id", "tb" + i);
+
+            let current = countCurrent(dataTotal, i);
+
+            dataTotal["data" + i].forEach(function (row,index)  {
+                var photo = row.Photo != ""
+                    ?'<img alt="'+row.Photo+ '" height="' + imgHeight + '" src="' + 'data/photos/'+ row.Photo + '"></img>':'<img height="' + imgHeight +'" src="data/photos/no-image.png"/>';
+
+                return $("#tb" + i).append('<tr>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + photo  + '</td>' +
+                    '<td>' +  (index + current + 1) + '<br/>' + scandata(row) + '</td>' +
+                    '</tr>');
+            });
+        }
+    }
+
+    d3.csv('data/Students.csv',function (error, data) {
+        if (error) throw error;
+
+        let inputDiv = d3.select("#inputHolder").append("div")
+            .style("top", (10) + "px")
+            .style("left", (10) + "px")
+        ;
+        inputDiv.append("text")
+            .html("<span style='font-family: sans-serif; font-size: 12px'>Number of Columns: &nbsp;</span>");
+
+        inputDiv
+            .append("input")
+            .style("width", "30px")
+            // .style("height", "16px")
+            .attr("id", "inputColumn")
+            .attr("type", "number")
+            .attr("value", numColumn)
+            .attr("min", 1)
+            .attr("max", 10)
+            .attr("step", "1")
+            .on("change", function () {
+                numColumn = this.value;
+                let dataTotal = split(data, numColumn);
+                draw(dataTotal, numColumn, imgHeight);
+            });
+
+        inputDiv.append("text")
+            .html("<span style='font-family: sans-serif; font-size: 12px; padding-left: 50px'>Image height: &nbsp;</span>");
+
+        inputDiv
+            .append("input")
+            .style("width", "40px")
+            .attr("id", "inputImgHeight")
+            .attr("type", "number")
+            .attr("value", imgHeight)
+            .attr("min", 20)
+            .attr("max", 200)
+            .attr("step", "10")
+            .on("change", function () {
+                imgHeight = this.value;
+                let dataTotal = split(data, numColumn);
+                draw(dataTotal, numColumn, imgHeight);
+            });
+
+        inputDiv.append("text")
+            .html("<span style='font-family: sans-serif; font-size: 12px;'>px</span>");
+
+        let dataTotal = split(data, numColumn);
+        draw(dataTotal, numColumn, imgHeight);
+    });
+
+</script>
+
+<div align="right"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="2">&copy; Last revised: 7:25PM Sep 11, 2019  &nbsp; &nbsp;
+    &nbsp;
+    &nbsp; &nbsp;</font></div>
+</body>
+</html>
