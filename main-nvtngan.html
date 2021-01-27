@@ -1,0 +1,147 @@
+<!-- Adapted from https://www.evl.uic.edu/aej/424/ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Human Computer Interaction</title>
+    <link href="figures/jsImgSlider/themes/4/js-image-slider.css" rel="stylesheet" type="text/css"/>
+    <script src="figures/jsImgSlider/themes/4/js-image-slider.js" type="text/javascript"></script>
+    <link href="figures/jsImgSlider/generic.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .noti > li {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body bgcolor="white" text="black">
+<div id="sliderFrame">
+    <div id="slider">
+        <img src="figures/jsImgSlider/images/image6.gif"/>
+        <img src="figures/jsImgSlider/images/project1.png"/>
+        <img src="figures/jsImgSlider/images/image1.jpg"/>
+        <img src="figures/jsImgSlider/images/image2.png"/>
+        <img src="figures/jsImgSlider/images/image3.png"/>
+        <img src="figures/jsImgSlider/images/image4.png"/>
+        <img src="figures/jsImgSlider/images/image5.png"/>
+    </div>
+    <!--Custom navigation buttons on both sides-->
+    <div class="group1-Wrapper">
+        <a onclick="imageSlider.previous()" class="group1-Prev"></a>
+        <a onclick="imageSlider.next()" class="group1-Next"></a>
+    </div>
+    <!--nav bar-->
+    <!--<div style="text-align:center;padding:20px;z-index:20;">
+        <a onclick="imageSlider.previous()" class="group2-Prev"></a>
+        <a id='auto' onclick="switchAutoAdvance()"></a>
+        <a onclick="imageSlider.next()" class="group2-Next"></a>
+    </div>-->
+</div>
+
+<!--
+<div align="left"><font style="font-family:
+      Helvetica,Arial,sans-serif;" color="black" size="5">Announcements:</font></div>
+
+<ul class="noti">
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><font><i>Sep 13:
+        </i>Processing libraries for Eclipse: <a href="https://github.com/iDataVisualizationLab/CS3366/tree/master/libs">https://github.com/iDataVisualizationLab/CS3366/tree/master/libs</a> <br>
+
+        </font></font>
+    </li>
+
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><font><i>Sep 18:<b>
+        </i>Whitacre College of Engineering Job Fair</b><br>
+            &nbsp; - When: 10am - 4pm, Wednesday, September 18, 2019 <br>
+            &nbsp; - Where: Lubbock Memorial Civic Center <br>
+
+        </font></font>
+    </li>
+    <br>
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black"
+              size="3"><font><i>Aug 30: </i>Whitacre
+            College of
+            Engineering - <font style="color: red">New</font> Graduate Students Orientation Make-up Session, for
+            the students who missed it last week<br>
+            &nbsp; - When: 3 - 4pm, Friday, August 30, 2019 <br>
+            &nbsp; - Where: Livermore Center 101 <br>
+        </font></font>
+    </li>
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><i>Aug 28:</i> Computer Science
+            Grad Student Meeting. <font style="color: red">Mandatory</font> for new students, current PhD and
+            Sponsored students<br>
+            &nbsp; - When: 3:30pm, Wednesday, August 28, 2019 <br>
+            &nbsp; - Where: Terry Fuller petroleum 110 <br></font>
+    </li>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><i>Aug 26:</i> Each student is
+            required to create an account on the Piazza: <a href="https://piazza.com/ttu/fall2019/cs3366/">https://piazza.com/ttu/fall2019/cs3366/</a></font>
+    </li>
+
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"> <i> Aug 26: </i> Every student
+            (include distant students) needs to send the following information to huyen.nguyen@ttu.edu, with the email
+            Subject "HCI class: Student information" by <b> Aug 28: </b> <br>
+            &nbsp; - Your full name <br>
+            &nbsp; - Your photo <br>
+            &nbsp; - Your program (Phd, Master, and undergraduate) <br>
+            &nbsp; - Nickname (to be appeared on the grade sheet) <br>
+        </font>
+    </li>
+</ul>
+-->
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Interesting examples:</font></div>
+
+
+<ul>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"> Bad doors are everywhere.
+            <a href="https://www.youtube.com/watch?v=yY96hTb8WgI" target="_blank">https://www.youtube.com/watch?v=yY96hTb8WgI</a>
+        </font>
+    </li>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><a
+                href="http://baddesigns.com/deadblt.html">How do you unlock the door? </a> </font>
+    </li>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><a
+                href="http://www.baddesigns.com/file.html">Opening the file drawer </a> </font>
+    </li>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><a
+                href=" http://www.baddesigns.com/knife.html">Hey, which side do you use for cutting? </a> </font>
+    </li>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><a
+                href=" http://www.baddesigns.com/seat.html"> Raising the driver's seat </a> </font>
+    </li>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"><a
+                href=" http://www.baddesigns.com/gascap.html"> Which side has the gas cap? </a> </font>
+    </li>
+
+    <br>
+
+    <li style="text-align: justify;">
+        <font style="font-family: Helvetica,Arial,sans-serif;" color="black" size="3"> Your turns to share the stories
+            of bad designs </font>
+    </li>
+
+
+</ul>
+
+
+
+
+</body>
+</html>
