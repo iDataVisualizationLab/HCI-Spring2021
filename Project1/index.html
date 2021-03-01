@@ -460,7 +460,8 @@ An example github report can be found <a href="https://github.com/CreativeCoding
                     '<a target="_blank" href="'+ row.githubURL  +'">' + row.githubURL + '</a>' : ""
 
                  var video = row.demo != "" ?
-                    `<iframe src="${row.demo}" class="iframe" width="200px" height="100px" style="display: block;"></iframe>` : ""
+                    // `<iframe src="${row.demo}" class="iframe" width="200px" height="100px" style="display: block;"></iframe>` : ""
+                    `<a href="${row.demo}">${row.demo}</a>` : ""
 
                 return $("#tb" + i).append('<tr>' +
                     '<td>' + row.id + '</td>' +
