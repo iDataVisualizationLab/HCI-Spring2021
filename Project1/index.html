@@ -441,7 +441,7 @@ An example github report can be found <a href="https://github.com/CreativeCoding
             thisTable.append('tbody') .attr("id", "tb" + i);
 
             dataTotal["data" + i].forEach(function (row,index)  {
-                // console.log(row)
+                console.log(row)
                 //var names = row.name.split(",").join("<br>")
                 var names=row.name
                 //var personal_photo = row.image != ""
@@ -459,8 +459,8 @@ An example github report can be found <a href="https://github.com/CreativeCoding
                 var githubURL = row.githubURL != "" ?
                     '<a target="_blank" href="'+ row.githubURL  +'">' + row.githubURL + '</a>' : ""
 
-                 var video = row.video != "" ?
-                    `<iframe src="${row.video}" class="iframe" width="100%" height="50px" style="display: block;"></iframe>` : ""
+                 var video = row.demo != "" ?
+                    `<iframe src="${row.demo}" class="iframe" width="100%" height="50px" style="display: block;"></iframe>` : ""
 
                 return $("#tb" + i).append('<tr>' +
                     '<td>' + row.id + '</td>' +
