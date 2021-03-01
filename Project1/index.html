@@ -451,7 +451,7 @@ An example github report can be found <a href="https://github.com/CreativeCoding
                 //    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.sketch + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
 
                 var screenshot_photo = row.screenshot != ""
-                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.image + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + (row.image.replace('open?id','uc?export=view&id').replace('watch?','embed/')) + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
 
                 var url = row.url != "" ?
                     '<a target="_blank" href="'+ row.url  +'">' + row.url + '</a>' : ""
