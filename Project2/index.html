@@ -1,0 +1,441 @@
+<!-- Adapted from https://www.evl.uic.edu/aej/424/ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Human Computer Interaction </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+    <style type="text/css">
+        /*table.fixed { table-layout:fixed; }*/
+    </style>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        /*
+        Generic Styling, for Desktops/Laptops
+        */
+        table {
+            font-size: 14px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        /* Zebra striping */
+        /*tr:nth-of-type(odd) {*/
+        /*    background: #eee;*/
+        /*}*/
+        tr:nth-of-type(even) {
+            background: #eee;
+        }
+        tr:nth-of-type(odd) {
+            background: #fff;
+        }
+        th {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            background-repeat: no-repeat;
+            background-position: 3% center;
+        }
+        td, th {
+            padding: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .name{
+            width: 200px;
+            overflow: hidden;
+            display: inline-block;
+            /*white-space: nowrap;*/
+        }
+
+        .link {
+            max-width:250px;
+            word-wrap:break-word;
+            white-space: normal
+        }
+
+        th.des:after {
+            content: "\21E9";
+        }
+
+        th.aes:after {
+            content: "\21E7";
+        }
+
+        /*
+        Max width before this PARTICULAR table gets nasty
+        This query will take effect for any screen smaller than 760px
+        and also iPads specifically.
+        */
+        @media
+        only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+            /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr { border: 1px solid #ccc; }
+
+            td {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            /*
+            Label the data
+            */
+            td:before {
+                content: attr(data-th) ": ";
+                font-weight: bold;
+                width: 6.5em;
+                display: inline-block;
+            }
+        }
+
+        /* Smartphones (portrait and landscape) ----------- */
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 480px) {
+            body {
+                padding: 0;
+                margin: 0;
+                width: 320px; }
+        }
+
+        /* iPads (portrait and landscape) ----------- */
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            body {
+                width: 495px;
+            }
+        }
+
+    </style>
+</head>
+<body bgcolor="white" text="black">
+
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project 2: The car dashboard</font></div>
+
+<center>  <img src="images1/car-dashboard-lights-scaled.jpg" alt="" border="0" width="800"> </center>
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="4">
+    <ul>
+         <li style="margin-left: 30px"> This project is <b>30%</b> of your final grade.<br>
+        <li style="margin-left: 30px"> Submission includes: <br>
+            <ul type="1">
+                <li style="margin-left: 40px"> A 1000 x 500 <b>gif</b> image of your
+                final interface which should be named <font color="#880">p2FirstnameLastname.gif</font>. 
+                </li>
+                <li style="margin-left: 40px"> A youtube demonstration video of 3 minutes (could be shorter) . 
+                </li>
+                <li style="margin-left: 40px"> GitHub repository link. You should also name your git project <font color="#880">p2FirstnameLastname</font> and Processing file <font color="#880">p2FirstnameLastname.pde</font> <br>
+                </li>
+                <li style="margin-left: 40px"> Presentation and Report web page (please see the instruction on creating this webpage at <b>15:40</b> of  <a href="https://zoom.us/rec/share/z7q9txGMCRJDFJbvjz4mv7gGskxV75LZGpto-nRf1Igry0mqu-PntfflFPQmiWp5.paf3KH3N3rGkBqOJ">this tutorial</a> Passcode: <b>z4&F9ytd</b> )</li>
+                <li style="margin-left: 40px">
+                	All above are due at <font color="#e00">11:59pm Friday, April 16</font> using <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe7y4Bc3LrCXWb7VxrsQVLlbCts-1b84wE-O9tsxL5tHpNnHQ/viewform">Google form link (require log in to gmail)</a>.
+                </li>
+                
+            </ul>
+        </li> 
+        <li style="margin-left: 30px">You should not update your source code and project report after the deadline. Or your score will be subtracted 10% after every late day</li>   
+<!-- Harichandana will make an html table with your homework at the end of this page.
+       <li style="margin-left: 30px"> You can update your source code and project report uptill <font color="#e00">4:30pm Friday, May 10th</font>.<br> -->
+       
+        <li style="margin-left: 30px"> You can provide feedback to the presenting students via
+            <span>Scoring link:</span> <a target="_blank" href="https://hci-presentation-p1.herokuapp.com/scoring">https://hci-presentation-p1.herokuapp.com/scoring</a>
+<br>
+            The feedback (ranging from 1 to 10 where 10 is the best) includes:<br> 
+            <ul type="1">
+            <li style="margin-left: 40px"> Usability of the interface </li>
+            <li style="margin-left: 40px"> Golden rules and visual princibles</li>
+            <li style="margin-left: 40px"> Overall quality </li>
+            <li style="margin-left: 40px"> Comments (optional) </li>  
+            </ul> 
+        </ul>
+</font></div>
+
+
+
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="#000" size="5">FQAs:</font></div>
+<ol>
+    <li style="margin-left: 30px">
+        <font style="font-family:Helvetica;" size="4">       
+        </font>
+    </li>
+    <li style="margin-left: 30px">
+    </li>
+</ol>
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project description:</font></div>
+
+
+           
+<font style="font-family:Helvetica;" color="black" size="4">
+    <ul>
+        <li style="margin-left: 30px"> There are various designs for car dashboards but not all of them are designed at the best for users. <br>Here is an example: <a href="http://www.baddesigns.com/speedo.html"> How fast am I going?</a> Tachometer vs. Speedometer</li>
+    </ul>   
+
+<center>  <img src="http://www.baddesigns.com/speedov.gif" alt="" border="0" width="800"> </center>
+
+    
+</font>
+
+
+    <br>
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> To get a <font color="#00f">C</font>, you need to:</b>   
+         <ul>
+            <li style="margin-left: 30px"> Find 5 examples of car dashboards (can be from online).
+            </li>
+            <li style="margin-left: 30px"> Put photos of the car dashboards on your report page.
+            </li>
+            <li style="margin-left: 30px"> Find the pros vs. cons with the current designs and explain why it is good vs. bad.
+            </li>
+        </ul>  
+    </font>
+
+
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> To get a <font color="#00f">B</font>, you need to:</b>   
+         <ul>
+            <li style="margin-left: 30px"> List your most common features and other more rare uses of a car dashboards. </li>
+
+            <li style="margin-left: 30px"> List the controls that the user interacts with the car dashboards.</li>
+
+            <li style="margin-left: 30px"> What are some common mistakes you can make with this current designs? </li>
+
+            <li style="margin-left: 30px"> Suggest the improvements to make on the control interface. Sketch your solution and justify your design decisions.<br>
+             </li>
+        </ul>  
+    </font>
+
+    <font style="font-family:Helvetica;" color="black" size="4">
+    <b style="margin-left: 30px"> Now, imagine that you can redesign the car dashboard. To get a <font color="#00f">A</font>, you need to:</b>   
+         <ul>
+            <li style="margin-left: 30px"> Come up with your design for the dashboard? </li>
+
+            <li style="margin-left: 30px"> Design and implement interactive features</li>
+
+             <li style="margin-left: 30px"> Design and implement user feedback</li>
+
+             <li style="margin-left: 30px"> You can use Processing/Processing.js or other languages to impelement your car dashboard.</li>
+        </ul>  
+    </font>
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project report on Github (readme file):</font></div>
+
+<ul>
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        This report also serves as your project presentation. 
+        The presentation is strictly 200 seconds. 
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Add a link to your interface/interactive features implementation. You can host it <a
+            href="https://pages.github.com/">on your github</a> page.
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Describle your project via text, figures, and screenshots.
+    </font>
+</li>
+
+</ul>
+<!--<font style="font-family:Helvetica;" color="black" size="4"> 
+An example github report can be found <a href="https://github.com/CreativeCodingLab/TimeArcs">here<a>.            
+</font> -->
+
+<hr style="width: 100%; height: 1px;">
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">In-class presentation:</font></div>
+
+<ul>
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        The presentation is 200 seconds per person.  Make sure that you are ready to talk right after the student in front of you is done. You will share your screen when you do your presentation.</b>
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        The timer is going to automatically move to the next person after 200 seconds.
+    </font>
+</li>
+
+<li style="margin-left: 30px">
+    <font style="font-family:Helvetica;" color="black" size="4">
+        Please practice your talk. Show the basic functionality and emphasize on why your interface is different.
+    </font>
+</li>
+
+
+</ul>
+<hr style="width: 100%; height: 1px;">
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Presentation list: (will be updated after the submission deadline)</font></div>
+
+
+<!--<div id="main" style="margin-top: 60px"></div>-->
+<div id="tableHolder" style="margin-top: 20px"></div>
+</body>
+<script type="text/javascript">
+    //var titles = ["id", "name", "image", "sketch", "screenshot", "url", "githubURL"];
+    var titles = ["id", "name", "screenshot", "url", "githubURL","video"];
+
+    let numColumn = 1;
+    let imgHeight = 100;
+
+    function split(data, numColumn){
+        let dataTotal = {};
+        let len = data.length;
+        let minHeight = Math.floor(len/numColumn);
+        let remainder = len%numColumn;
+
+        for (let i = 0; i < numColumn; i++){
+            if (i < remainder){
+                // du ra
+                dataTotal["data" + i] = data.slice(i*minHeight + i, (i+1)*minHeight + (i+1))
+            }
+            else {
+                dataTotal["data" + i] = data.slice(
+                    (remainder*minHeight + remainder) + (i-remainder)*minHeight,
+                    (remainder*minHeight + remainder) + (i-remainder+1)*minHeight
+                )
+            }
+        }
+        return dataTotal
+    }
+
+    function draw(dataTotal, numColumn, imgHeight){
+        d3.select("#tableHolder").selectAll("*").remove();
+        var table = d3.select('#tableHolder').append('table').append("tr");
+
+        for (let i = 0; i < numColumn; i++){
+            let thisTable = table.append("td")
+                .attr("valign","top")
+                .append('table');
+
+            thisTable.append('thead').append('tr')
+                .selectAll('th')
+                .data(titles).enter()
+                .append('th')
+                .text(d => {
+                    if (d === "url"){
+                        return "Presentation URL"
+                    }
+                    else if (d === "githubURL"){
+                        return "GitHub"
+                    }
+                    else return d.charAt(0).toUpperCase() + d.substring(1);
+                });
+
+            thisTable.append('tbody') .attr("id", "tb" + i);
+
+            dataTotal["data" + i].forEach(function (row,index)  {
+                console.log(row)
+                //var names = row.name.split(",").join("<br>")
+                var names=row.name
+                //var personal_photo = row.image != ""
+                //    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.image + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                //var sketch_photo = row.sketch != ""
+                //    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + row.sketch + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                var screenshot_photo = row.screenshot != ""
+                    ?'<img alt="'+row.name+ '" height="' + imgHeight + '" src="' + (row.image.replace('open?id','uc?export=view&id').replace('watch?','embed/')) + '"></img>':'<img height="' + imgHeight +'" src="https://i.imgur.com/ZXqHNnb.jpg"/>';
+
+                var url = row.url != "" ?
+                    '<a target="_blank" href="'+ row.url  +'">' + row.url + '</a>' : ""
+
+                var githubURL = row.githubURL != "" ?
+                    '<a target="_blank" href="'+ row.githubURL  +'">' + row.githubURL + '</a>' : ""
+
+                 var video = row.demo != "" ?
+                    // `<iframe src="${row.demo}" class="iframe" width="200px" height="100px" style="display: block;"></iframe>` : ""
+                    `<a href="${row.demo}">${row.demo}</a>` : ""
+
+                return $("#tb" + i).append('<tr>' +
+                    '<td>' + row.id + '</td>' +
+                    //'<td style="vertical-align: middle;"><span class="name">' +  names + '</span></td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + names  + '</td>' +
+                    // '<td style="text-align: center; vertical-align: middle;" >' + personal_photo  + '</td>' +
+                    //'<td style="text-align: center; vertical-align: middle;" >' + sketch_photo  + '</td>' +
+                    '<td style="text-align: center; vertical-align: middle;" >' + screenshot_photo  + '</td>' +
+                    '<td class="link">' + url + '</span></td>' +
+                    '<td class="link"><span>' + githubURL + '</span></td>' +
+                    '<td class="link">' + video + '</span></td>' +
+                    '</tr>');
+            });
+        }
+    }
+
+    d3.csv('../data/hw1_presentation.csv',function (error, data) {
+        if (error) throw error;
+
+        let dataTotal = split(data, numColumn);
+        draw(dataTotal, numColumn, imgHeight);
+    });
+
+</script>
+
+<!--<div align="right"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="2">&copy; Last revised: September 18, 2019 &nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp;</font></div>-->
+
+</html>
