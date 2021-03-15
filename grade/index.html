@@ -41,6 +41,9 @@
                             <th scope="row">Project 1</th>
                             <td id="p1" width="100"></td>
                         </tr>
+                        <tr>
+                            <td colspan="2" id="p1_c"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -123,6 +126,7 @@
         };
 
         d3.select('#p1').text(format(json.p1)+' /30');
+        d3.select('#p1_c').text(json.Project1Comment);
 
         d3.select('#p2').text(format(json.p2)+' /30');
 
