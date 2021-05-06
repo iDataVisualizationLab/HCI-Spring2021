@@ -1,0 +1,196 @@
+<!-- Adapted from https://www.evl.uic.edu/aej/424/ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Human Computer Interaction </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+    <style type="text/css">
+        /*table.fixed { table-layout:fixed; }*/
+    </style>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        /*
+        Generic Styling, for Desktops/Laptops
+        */
+        table {
+            font-size: 14px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        /* Zebra striping */
+        /*tr:nth-of-type(odd) {*/
+        /*    background: #eee;*/
+        /*}*/
+        tr:nth-of-type(even) {
+            background: #eee;
+        }
+        tr:nth-of-type(odd) {
+            background: #fff;
+        }
+        th {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            background-repeat: no-repeat;
+            background-position: 3% center;
+        }
+        td, th {
+            padding: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .name{
+            width: 200px;
+            overflow: hidden;
+            display: inline-block;
+            /*white-space: nowrap;*/
+        }
+
+        .link {
+            max-width:250px;
+            word-wrap:break-word;
+            white-space: normal
+        }
+
+        th.des:after {
+            content: "\21E9";
+        }
+
+        th.aes:after {
+            content: "\21E7";
+        }
+
+        /*
+        Max width before this PARTICULAR table gets nasty
+        This query will take effect for any screen smaller than 760px
+        and also iPads specifically.
+        */
+        @media
+        only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+            /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr { border: 1px solid #ccc; }
+
+            td {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            /*
+            Label the data
+            */
+            td:before {
+                content: attr(data-th) ": ";
+                font-weight: bold;
+                width: 6.5em;
+                display: inline-block;
+            }
+        }
+
+        /* Smartphones (portrait and landscape) ----------- */
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 480px) {
+            body {
+                padding: 0;
+                margin: 0;
+                width: 320px; }
+        }
+
+        /* iPads (portrait and landscape) ----------- */
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            body {
+                width: 495px;
+            }
+        }
+
+    </style>
+</head>
+<body bgcolor="white" text="black">
+
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="5">Project 2: The car dashboard</font></div>
+
+<center>  <img src="images1/f1.jpeg" alt="" border="0" width="800"> </center>
+
+<div align="left"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="4">
+    <ul>
+         <li style="margin-left: 30px"> The Final exam is <b>40%</b> of your final grade.<br></li>
+
+        <li style="margin-left: 30px"> Our final exam is from 6:30 pm to 8:00 pm, May 11th.</li>
+        <li style="margin-left: 30px"> Professor will proctor the example via zoom <a href="https://zoom.us/s/97602772888">https://zoom.us/s/97602772888</a><br>
+        Please make sure that you have/prepare: <br>
+            <ul type="1">
+                <li style="margin-left: 40px"> A webcam (need to be on for an entire exam period).
+                </li>
+                <li style="margin-left: 40px"> Blank pages to write your answer. 
+                </li>
+                <li style="margin-left: 40px"> An empty table so that I can see you full picture while you are doing the exam.
+                </li>
+                <li style="margin-left: 40px"> A calculator (you cannot use your phone or computer)</li>
+                <li style="margin-left: 40px"> A printer to print out the exam questions (optional)</a>.
+                </li>   
+            </ul>
+        </li> <br><br>
+       <li>This Thursday 4-5 pm I will provide another review lecture (for distant students who could not attend Wednesday and Friday last week).<br>
+Feel free to join here: https://zoom.us/s/97602772888.</li>
+   </ul>
+</font></div>
+
+<br>
+
+
+
+<!--<div align="right"><font style="font-family:
+        Helvetica,Arial,sans-serif;" color="black" size="2">&copy; Last revised: September 18, 2019 &nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp;</font></div>-->
+
+</html>
